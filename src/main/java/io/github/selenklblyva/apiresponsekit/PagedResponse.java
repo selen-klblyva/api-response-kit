@@ -12,11 +12,25 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PagedResponse<T> {
-    private long totalElements;
-    private int totalPages;
+
+    private List<T> content;
     private int pageNumber;
     private int pageSize;
-    private boolean lastPage;
-    private boolean firstPage;
-    private List<T> data;
+    private long totalElements;
+    private int totalPages;
+    private boolean last;
+    private boolean first;
+
+    public static <T> PagedResponse<T> of(org.springframework.data.domain.Page<T> page) {
+        return PagedResponse.<T>builder()
+                .content(page.getContent())
+                .pageNumber(page.getNumber())
+                .pageSize(page.getSize())
+                .totalElements(page.getTotalElements())
+                .totalPages(page.getTotalPages())
+                .first(page.isFirst())
+                .last(page.isLast())
+                .build();
+    }
 }
+
