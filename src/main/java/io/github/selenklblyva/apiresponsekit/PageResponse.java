@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PagedResponse<T> {
+public class PageResponse<T> {
 
     private List<T> content;
     private int pageNumber;
@@ -21,8 +21,8 @@ public class PagedResponse<T> {
     private boolean last;
     private boolean first;
 
-    public static <T> PagedResponse<T> of(org.springframework.data.domain.Page<T> page) {
-        return PagedResponse.<T>builder()
+    public static <T> PageResponse<T> of(org.springframework.data.domain.Page<T> page) {
+        return PageResponse.<T>builder()
                 .content(page.getContent())
                 .pageNumber(page.getNumber())
                 .pageSize(page.getSize())
@@ -33,4 +33,3 @@ public class PagedResponse<T> {
                 .build();
     }
 }
-
